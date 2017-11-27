@@ -243,7 +243,7 @@ union Sass_Value *convert_java_value_to_sass(JNIEnv *env, jobject j_value) {
             c_separator = SASS_SPACE;
         }
 
-        union Sass_Value *sass_list = sass_make_list((size_t) c_size, c_separator);
+        union Sass_Value *sass_list = sass_make_list((size_t) c_size, c_separator, false);
 
         jmethodID j_get_method = (*env)->GetMethodID(env, j_type_class, "get", "(I)Ljava/lang/Object;");
 
@@ -357,7 +357,7 @@ union Sass_Value *function_callback(
 
     (*env)->DeleteLocalRef(env, j_result);
     (*env)->DeleteLocalRef(env, j_arguments);
-    
+
     return sass_result;
 }
 
@@ -844,7 +844,7 @@ JNIEXPORT jobjectArray JNICALL Java_io_bit3_jsass_adapter_NativeAdapter_compileF
     struct Sass_Options *sass_options = sass_file_context_get_options(sass_context);
     configure_options(env, j_context, sass_options);
     struct Sass_Compiler *sass_compiler = sass_make_file_compiler(sass_context);
-    
+
     (*env)->DeleteLocalRef(env, j_adapter);
     (*env)->DeleteLocalRef(env, j_context);
 
