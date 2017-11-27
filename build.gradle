@@ -40,7 +40,7 @@ jacoco {
 }
 
 repositories {
-    mavenCentral()
+    mavenLocal()
 }
 
 dependencies {
